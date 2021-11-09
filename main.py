@@ -9,18 +9,34 @@ my_orders_counter = 0
 def StartCommand(message):
 	markup_inline = types.ReplyKeyboardMarkup(resize_keyboard = True)
 	
+	item_menu = types.KeyboardButton(text = u'📋' + "Меню")
+	item_basket = types.KeyboardButton(text = u'🛒' + 'Корзина')
+	item_my_orders = types.KeyboardButton(text = u'📝' + 'Мои Заказы')
+	item_checkout = types.KeyboardButton(text = u'🚘' + 'Оформить Заказ')
 
-	item_basket = types.InlineKeyboardButton(text = u'🛒' + 'Корзина', callback_data = 'basket')
-	item_my_orders = types.InlineKeyboardButton(text = u'📝' + 'Мои Заказы', callback_data = 'my_orders')
-	item_checkout = types.InlineKeyboardButton(text = u'🚘' + 'Оформить Заказ', callback_data = 'checkout')
-
-	markup_inline.add(item_checkout, item_basket, item_my_orders)
-	bot.send_message(message.chat.id, 'Добрый день!',
+	markup_inline.add(item_menu, item_checkout, item_basket, item_my_orders)
+	bot.send_message(message.chat.id, f'Добрый день! {message.from_user.first_name}',
 		reply_markup=markup_inline
 	)
 
-@bot.callback_query_handler(func = lambda call : True)
-def FirstStep(message)
+@bot.message_handler(content_types = ['text'])
+def answer(message):
+	if message.text == u'📋' + "Меню":
+		markup_inline = types.ReplyKeyboardMarkup(resize_keyboard = True)
 
+		item_shaurma = types.KeyboardButton(text = 'Шаурма')
+		item_burger = types.KeyboardButton(text = 'Бургеры')
+		item_pizza = types.KeyboardButton(text = 'Пицца')
+		item_juice = types.KeyboardButton(text = 'Напитки')
+		item_fri = types.KeyboardButton(text = 'Картофель Фри')
+		item_souces = types.KeyboardButton(text = 'Соусы')
+		item_supplements = types.KeyboardButton(text = 'Добавки')
+
+		markup_inline.add(item_shaurma, item_burger, item_pizza, 
+		item_juice, item_fri, item_souces, item_supplements 
+		)
+		bot.send_message(message.chat.id, 'Nizami',
+			reply_markup=markup_inline
+		)
 
 bot.polling(none_stop = True, interval = 0)

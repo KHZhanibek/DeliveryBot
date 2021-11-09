@@ -5,11 +5,11 @@ bot = telebot.TeleBot('2082841531:AAGGrZ8tdMwcNaximIWu0d9nb-FRcPPOfQo')
 
 @bot.message_handler(commands = ['start'])
 def StartCommand(message):
-	bot.send_message(message.chat.id, 'Добрый день!')
+	bot.send_message(message.chat.id, f'Добрый день! {message.from_user.first_name} {message.from_user.last_name}' )
 
 @bot.message_handler(commands = ['info', 'get_info'])
 def GetUserInfo(message):
-	markup_inline = types.ReplyKeyboardMarkup()
+	markup_inline = types.InlineKeyboardMarkup()
 	item_yes = types.InlineKeyboardButton(text = 'Yes', callback_data = 'yes')
 	item_no = types.InlineKeyboardButton(text="No", callback_data='no')
 
@@ -37,8 +37,8 @@ def answer(call):
 def GetText(message):
 	if message.text == 'My ID':
 		bot.send_message(message.chat.id, f'Your ID: {message.from_user.id}')
-	elif message.texy == 'My username':
-		bot.send_message(message.chat.id, f'Your username: {message.from_user.firstname} {message.from_user.lastname}')
+	elif message.text == 'My username':
+		bot.send_message(message.chat.id, f'Your username: {message.from_user.first_name} {message.from_user.last_name}')
 
 
 bot.polling(none_stop = True, interval = 0)
