@@ -24,19 +24,22 @@ def answer(message):
 	if message.text == u'📋' + "Меню":
 		markup_inline = types.ReplyKeyboardMarkup(resize_keyboard = True)
 
-		item_shaurma = types.KeyboardButton(text = 'Шаурма')
-		item_burger = types.KeyboardButton(text = 'Бургеры')
-		item_pizza = types.KeyboardButton(text = 'Пицца')
-		item_juice = types.KeyboardButton(text = 'Напитки')
-		item_fri = types.KeyboardButton(text = 'Картофель Фри')
-		item_souces = types.KeyboardButton(text = 'Соусы')
-		item_supplements = types.KeyboardButton(text = 'Добавки')
+		item_shaurma = types.KeyboardButton(text = u'🌯'+'Шаурма')
+		item_burger = types.KeyboardButton(text = u'🍔'+'Бургеры')
+		item_sushi = types.KeyboardButton(text = u'🍣'+'Суши')
+		item_pizza = types.KeyboardButton(text = u'🍕'+'Пицца')
+		item_juice = types.KeyboardButton(text = u'🥤'+'Напитки')
+		item_fri = types.KeyboardButton(text = u'🍟'+'Картофель Фри')
+		item_souces = types.KeyboardButton(text = u'🥫'+'Соусы')
+		item_supplements = types.KeyboardButton(text = u'🧀'+'Добавки')
 
-		markup_inline.add(item_shaurma, item_burger, item_pizza, 
-		item_juice, item_fri, item_souces, item_supplements 
+		markup_inline.add(item_shaurma, item_burger, item_sushi, 
+		item_pizza, item_juice, item_fri, item_souces, item_supplements 
 		)
 		bot.send_message(message.chat.id, 'Nizami',
 			reply_markup=markup_inline
 		)
+	else:
+		bot.send_message(message.chat.id, 'Категория не найдена')
 
 bot.polling(none_stop = True, interval = 0)
